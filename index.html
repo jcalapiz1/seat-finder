@@ -195,17 +195,14 @@ fetch("guests.csv")
         const lines = csv.trim().split(/\r?\n/);
 
         // Skip the header row
-        guests = lines.slice(1).map(line => {
-
-            const columns = line.split(",");
-
-            return {
-                name: columns[0]?.trim(),
-                table: columns[1]?.trim(),
-                seat: columns[2]?.trim()
-            };
-
-        }).filter(guest => guest.name);
+         guests = rows.map(row => {
+             const columns = row.split(",");
+         
+             return {
+                 name: columns[0]?.trim() || "",
+                 table: columns[1]?.trim() || ""
+             };
+         }).filter(guest => guest.name);
 
     })
     .catch(error => {
