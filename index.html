@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Find Your Seat | Adolf & Jebien</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f7f3eb;
+        color: #344436;
+
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 420px;
+        text-align: center;
+    }
+
+    .names {
+        font-family: Georgia, serif;
+        font-size: 30px;
+        margin-bottom: 5px;
+    }
+
+    .date {
+        font-size: 12px;
+        letter-spacing: 3px;
+        margin-bottom: 50px;
+        color: #777;
+    }
+
+    h1 {
+        font-family: Georgia, serif;
+        font-weight: normal;
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .search-box {
+        position: relative;
+    }
+
+    input {
+        width: 100%;
+        padding: 16px 18px;
+        border: 1px solid #aaa;
+        border-radius: 6px;
+        background: white;
+        font-size: 16px;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #536b55;
+    }
+
+    #suggestions {
+        position: absolute;
+        width: 100%;
+        background: white;
+        border-radius: 6px;
+        margin-top: 4px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        z-index: 10;
+    }
+
+    .suggestion {
+        padding: 14px 18px;
+        text-align: left;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+    }
+
+    .suggestion:hover {
+        background: #eef1eb;
+    }
+
+    #result {
+        display: none;
+        margin-top: 40px;
+    }
+
+    .guest-name {
+        font-family: Georgia, serif;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .your-table {
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #777;
+    }
+
+    .table-number {
+        font-family: Georgia, serif;
+        font-size: 48px;
+        margin: 8px 0;
+    }
+
+    .message {
+        margin-top: 25px;
+        font-family: Georgia, serif;
+        font-style: italic;
+        color: #666;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="names">Adolf & Jebien</div>
+    <div class="date">07 · 12 · 2026</div>
+
+    <h1>Find Your Seat</h1>
+
+    <div class="subtitle">
+        Enter your name to discover your table
+    </div>
+
+    <div class="search-box">
+
+        <input
+            id="search"
+            type="text"
+            placeholder="Type your name..."
+            autocomplete="off"
+        >
+
+        <div id="suggestions"></div>
+
+    </div>
+
+    <div id="result">
+
+        <div class="guest-name" id="guestName"></div>
+
+        <div class="your-table">
+            YOU'RE SEATED AT
+        </div>
+
+        <div class="table-number" id="tableNumber"></div>
+
+        <div class="message">
+            We're so happy you're here ♡
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// SAMPLE GUESTS
+// We'll replace these with your real guest list later.
+
+const guests = [
+
+    { name: "Maria Dela Cruz", table: "TABLE 08" },
+    { name: "Marianne Santos", table: "TABLE 12" },
+    { name: "Mark Villanueva", table: "TABLE 04" },
+    { name: "Maria Santos", table: "TABLE 06" },
+    { name: "Juan Dela Cruz", table: "TABLE 08" },
+    { name: "Ana Reyes", table: "TABLE 05" }
+
+];
+
+
+const search = document.getElementById("search");
+const suggestions = document.getElementById("suggestions");
+const result = document.getElementById("result");
+
+
+search.addEventListener("input", function() {
+
+    const typed = search.value.trim().toLowerCase();
+
+    suggestions.innerHTML = "";
+    result.style.display = "none";
+
+    // Require at least 2 letters
+    if (typed.length < 2) {
+        return;
+    }
+
+    const matches = guests.filter(guest =>
+        guest.name.toLowerCase().includes(typed)
+    );
+
+
+    matches.forEach(guest => {
+
+        const item = document.createElement("div");
+
+        item.className = "suggestion";
+        item.textContent = guest.name;
+
+        item.addEventListener("click", function() {
+
+            search.value = guest.name;
+
+            suggestions.innerHTML = "";
+
+            document.getElementById("guestName").textContent =
+                guest.name.toUpperCase();
+
+            document.getElementById("tableNumber").textContent =
+                guest.table;
+
+            result.style.display = "block";
+
+        });
+
+        suggestions.appendChild(item);
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
