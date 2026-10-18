@@ -174,26 +174,46 @@
 
 <script>
 
-// SAMPLE GUESTS
-// We'll replace these with your real guest list later.
-
-const guests = [
-
-    { name: "Maria Dela Cruz", table: "TABLE 08" },
-    { name: "Marianne Santos", table: "TABLE 12" },
-    { name: "Mark Villanueva", table: "TABLE 04" },
-    { name: "Maria Santos", table: "TABLE 06" },
-    { name: "Juan Dela Cruz", table: "TABLE 08" },
-    { name: "Ana Reyes", table: "TABLE 05" }
-
-];
-
+let guests = [];
 
 const search = document.getElementById("search");
 const suggestions = document.getElementById("suggestions");
 const result = document.getElementById("result");
 
 
+// Load guest list from CSV
+fetch("guests.csv")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Could not load guests.csv");
+        }
+
+        return response.text();
+    })
+    .then(csv => {
+
+        const lines = csv.trim().split(/\r?\n/);
+
+        // Skip the header row
+        guests = lines.slice(1).map(line => {
+
+            const columns = line.split(",");
+
+            return {
+                name: columns[0]?.trim(),
+                table: columns[1]?.trim(),
+                seat: columns[2]?.trim()
+            };
+
+        }).filter(guest => guest.name);
+
+    })
+    .catch(error => {
+        console.error("Error loading guest list:", error);
+    });
+
+
+// Search guest list as user types
 search.addEventListener("input", function() {
 
     const typed = search.value.trim().toLowerCase();
@@ -201,10 +221,11 @@ search.addEventListener("input", function() {
     suggestions.innerHTML = "";
     result.style.display = "none";
 
-    // Require at least 2 letters
+    // Don't search until at least 2 characters are entered
     if (typed.length < 2) {
         return;
     }
+
 
     const matches = guests.filter(guest =>
         guest.name.toLowerCase().includes(typed)
@@ -218,6 +239,7 @@ search.addEventListener("input", function() {
         item.className = "suggestion";
         item.textContent = guest.name;
 
+
         item.addEventListener("click", function() {
 
             search.value = guest.name;
@@ -228,11 +250,12 @@ search.addEventListener("input", function() {
                 guest.name.toUpperCase();
 
             document.getElementById("tableNumber").textContent =
-                guest.table;
+                "TABLE " + guest.table;
 
             result.style.display = "block";
 
         });
+
 
         suggestions.appendChild(item);
 
@@ -241,6 +264,7 @@ search.addEventListener("input", function() {
 });
 
 </script>
+
 
 </body>
 </html>
