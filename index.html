@@ -17,7 +17,7 @@
             --sage: #899a82;
             --sage-dark: #526150;
             --olive: #344136;
-            --muted: #797d76;
+            --muted: #777b75;
             --border: #d8d7cf;
             --white: #ffffff;
         }
@@ -33,9 +33,9 @@
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
             background: var(--ivory);
             color: var(--olive);
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         button,
@@ -48,18 +48,19 @@
             color: inherit;
         }
 
-        /* =========================
-           SIDEBAR
-        ========================== */
+        /* ========================================
+           DESKTOP SIDEBAR
+        ======================================== */
 
         .sidebar {
             position: fixed;
             top: 0;
-            left: 0;
             bottom: 0;
+            left: 0;
+            z-index: 1000;
 
-            width: 260px;
-            padding: 42px 24px;
+            width: 275px;
+            padding: 42px 24px 30px;
 
             display: flex;
             flex-direction: column;
@@ -67,27 +68,27 @@
             background: var(--sage-dark);
             color: var(--white);
 
-            z-index: 1000;
+            box-shadow: 4px 0 20px rgba(31, 40, 32, 0.08);
         }
 
-        .brand {
+        .sidebar-brand {
+            margin-bottom: 48px;
             text-align: center;
-            margin-bottom: 50px;
         }
 
-        .brand-names {
+        .sidebar-names {
             margin: 0 0 10px;
             font-family: Georgia, "Times New Roman", serif;
             font-size: 27px;
             font-weight: normal;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.4px;
         }
 
-        .brand-date {
+        .sidebar-date {
             margin: 0;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 3px;
-            opacity: 0.78;
+            opacity: 0.8;
         }
 
         .nav-menu {
@@ -104,14 +105,13 @@
             align-items: center;
             gap: 13px;
 
-            border: 0;
-            border-radius: 7px;
+            border: none;
+            border-radius: 8px;
 
             background: transparent;
-            color: rgba(255, 255, 255, 0.83);
+            color: rgba(255, 255, 255, 0.82);
 
             text-align: left;
-            text-decoration: none;
             cursor: pointer;
 
             transition:
@@ -121,7 +121,7 @@
         }
 
         .nav-item:hover {
-            background: rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.1);
             color: var(--white);
             transform: translateX(2px);
         }
@@ -132,25 +132,25 @@
         }
 
         .nav-icon {
-            width: 22px;
+            width: 24px;
             flex-shrink: 0;
             text-align: center;
-            font-size: 17px;
+            font-size: 18px;
         }
 
-        .sidebar-note {
+        .sidebar-footer {
             margin-top: auto;
             text-align: center;
             font-family: Georgia, "Times New Roman", serif;
             font-size: 13px;
             font-style: italic;
             line-height: 1.6;
-            opacity: 0.7;
+            opacity: 0.72;
         }
 
-        /* =========================
+        /* ========================================
            MOBILE HEADER
-        ========================== */
+        ======================================== */
 
         .mobile-header {
             display: none;
@@ -159,41 +159,43 @@
         .menu-overlay {
             position: fixed;
             inset: 0;
-            display: none;
-            background: rgba(25, 32, 26, 0.48);
             z-index: 900;
+
+            display: none;
+            background: rgba(24, 31, 25, 0.5);
         }
 
         .menu-overlay.visible {
             display: block;
         }
 
-        /* =========================
-           MAIN AREA
-        ========================== */
+        /* ========================================
+           MAIN CONTENT
+        ======================================== */
 
-        .main {
+        .main-content {
             min-height: 100vh;
-            margin-left: 260px;
+            margin-left: 275px;
         }
 
         .page-section {
             display: none;
             min-height: 100vh;
-            padding: 70px 40px;
-            animation: fadeIn 0.3s ease;
+            padding: 65px 40px;
         }
 
         .page-section.active {
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(6px);
+                transform: translateY(7px);
             }
 
             to {
@@ -204,51 +206,57 @@
 
         .content-card {
             width: 100%;
-            max-width: 580px;
+            max-width: 600px;
             text-align: center;
         }
 
+        .wide-card {
+            max-width: 950px;
+        }
+
         .eyebrow {
-            margin: 0 0 13px;
+            margin: 0 0 14px;
             color: var(--sage-dark);
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
 
         .page-title {
-            margin: 0 0 12px;
+            margin: 0 0 14px;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(32px, 6vw, 48px);
+            font-size: clamp(34px, 5vw, 49px);
             font-weight: normal;
-            line-height: 1.15;
+            line-height: 1.14;
         }
 
         .page-description {
-            max-width: 440px;
-            margin: 0 auto 34px;
+            max-width: 470px;
+            margin: 0 auto 32px;
+
             color: var(--muted);
             font-size: 14px;
             line-height: 1.7;
         }
 
-        /* =========================
-           SEARCH
-        ========================== */
+        /* ========================================
+           GUEST SEARCH
+        ======================================== */
 
-        .search-wrapper {
+        .search-container {
             position: relative;
-            max-width: 470px;
+            width: 100%;
+            max-width: 490px;
             margin: 0 auto;
         }
 
-        .search-input-wrapper {
+        .search-input-container {
             position: relative;
         }
 
-        #search {
+        #searchInput {
             width: 100%;
-            padding: 17px 48px 17px 19px;
+            padding: 17px 49px 17px 19px;
 
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -258,90 +266,106 @@
 
             font-size: 16px;
             outline: none;
-            box-shadow: 0 5px 20px rgba(52, 65, 54, 0.05);
+
+            box-shadow: 0 6px 20px rgba(52, 65, 54, 0.06);
 
             transition:
                 border-color 0.2s ease,
                 box-shadow 0.2s ease;
         }
 
-        #search:focus {
+        #searchInput:focus {
             border-color: var(--sage);
-            box-shadow: 0 6px 22px rgba(82, 97, 80, 0.11);
+            box-shadow: 0 7px 24px rgba(82, 97, 80, 0.13);
         }
 
-        .search-symbol {
+        #searchInput:disabled {
+            background: #eeece6;
+            cursor: not-allowed;
+        }
+
+        .search-icon {
             position: absolute;
             top: 50%;
             right: 18px;
+
             transform: translateY(-50%);
+
             color: var(--sage-dark);
             pointer-events: none;
         }
 
         #suggestions {
             position: absolute;
-            top: calc(100% + 5px);
-            left: 0;
+            top: calc(100% + 6px);
             right: 0;
+            left: 0;
+            z-index: 50;
 
-            max-height: 270px;
+            max-height: 285px;
             overflow-y: auto;
 
             border-radius: 8px;
             background: var(--white);
-            box-shadow: 0 12px 28px rgba(49, 61, 50, 0.14);
+            box-shadow: 0 12px 30px rgba(45, 56, 46, 0.15);
 
             text-align: left;
-            z-index: 50;
         }
 
         .suggestion {
-            padding: 14px 18px;
-            border-bottom: 1px solid #efeee9;
+            padding: 15px 18px;
+            border-bottom: 1px solid #eeeeea;
             cursor: pointer;
         }
 
         .suggestion:last-child {
-            border-bottom: 0;
+            border-bottom: none;
         }
 
         .suggestion:hover,
         .suggestion:focus {
             background: #edf0ea;
+            outline: none;
         }
 
-        .no-matches {
-            padding: 16px 18px;
+        .no-match {
+            padding: 17px 18px;
             color: var(--muted);
             font-size: 14px;
             line-height: 1.5;
         }
 
-        .loading-message {
-            margin-top: 16px;
+        .status-message {
+            margin-top: 15px;
             color: var(--muted);
             font-size: 13px;
+            line-height: 1.5;
         }
 
-        /* =========================
-           RESULT
-        ========================== */
+        .status-message.error {
+            color: #8f4c47;
+        }
 
-        #result {
+        /* ========================================
+           TABLE RESULT
+        ======================================== */
+
+        #seatResult {
             display: none;
-            max-width: 470px;
-            margin: 35px auto 0;
-            padding: 32px 25px;
 
-            border: 1px solid rgba(137, 154, 130, 0.35);
-            border-radius: 10px;
+            max-width: 490px;
+            margin: 36px auto 0;
+            padding: 33px 25px;
 
-            background: rgba(255, 255, 255, 0.55);
-            animation: resultReveal 0.35s ease;
+            border: 1px solid rgba(137, 154, 130, 0.4);
+            border-radius: 11px;
+
+            background: rgba(255, 255, 255, 0.58);
+
+            animation: revealResult 0.35s ease;
         }
 
-        @keyframes resultReveal {
+        @keyframes revealResult {
             from {
                 opacity: 0;
                 transform: translateY(10px);
@@ -355,90 +379,96 @@
 
         .guest-name {
             margin-bottom: 19px;
+
             font-family: Georgia, "Times New Roman", serif;
             font-size: 21px;
             letter-spacing: 0.5px;
         }
 
-        .your-table {
+        .table-label {
             color: var(--muted);
             font-size: 10px;
             letter-spacing: 3px;
         }
 
         .table-number {
-            margin: 10px 0 12px;
+            margin: 10px 0 13px;
+
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 50px;
+            font-size: clamp(43px, 8vw, 55px);
             line-height: 1;
         }
 
         .result-message {
-            margin-top: 23px;
+            margin-top: 24px;
+
             color: var(--sage-dark);
             font-family: Georgia, "Times New Roman", serif;
             font-size: 15px;
             font-style: italic;
         }
 
-        /* =========================
+        /* ========================================
            SEATING CHART
-        ========================== */
+        ======================================== */
 
         .chart-frame {
+            width: 100%;
             max-width: 900px;
             margin: 0 auto;
 
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 11px;
             overflow: hidden;
 
             background: var(--white);
-            box-shadow: 0 8px 25px rgba(52, 65, 54, 0.08);
+            box-shadow: 0 8px 26px rgba(52, 65, 54, 0.08);
         }
 
         .chart-scroll {
-            max-height: 70vh;
+            max-height: 68vh;
             overflow: auto;
+
             -webkit-overflow-scrolling: touch;
         }
 
-        .chart-image {
+        #seatingChartImage {
             display: block;
             width: 100%;
-            min-width: 650px;
             height: auto;
         }
 
-        .chart-placeholder {
+        #chartPlaceholder {
             display: none;
-            padding: 60px 25px;
+            padding: 70px 25px;
+
             color: var(--muted);
-            line-height: 1.7;
+            font-size: 14px;
+            line-height: 1.8;
         }
 
         .chart-actions {
             margin-top: 22px;
         }
 
-        /* =========================
-           LINK PAGES
-        ========================== */
+        /* ========================================
+           EXTERNAL LINK SECTIONS
+        ======================================== */
 
         .feature-icon {
-            width: 75px;
-            height: 75px;
-            margin: 0 auto 24px;
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 25px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            border: 1px solid rgba(82, 97, 80, 0.25);
+            border: 1px solid rgba(82, 97, 80, 0.27);
             border-radius: 50%;
 
             color: var(--sage-dark);
-            font-size: 29px;
+            font-size: 28px;
         }
 
         .primary-button,
@@ -446,10 +476,11 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 9px;
 
-            min-width: 210px;
-            padding: 14px 22px;
+            min-width: 215px;
+            padding: 14px 23px;
+
             border-radius: 7px;
 
             text-decoration: none;
@@ -483,48 +514,50 @@
             background: rgba(82, 97, 80, 0.07);
         }
 
-        .privacy-note {
-            max-width: 440px;
+        .small-note {
+            max-width: 450px;
             margin: 22px auto 0;
+
             color: var(--muted);
             font-size: 12px;
             line-height: 1.6;
         }
 
-        /* =========================
-           MOBILE
-        ========================== */
+        /* ========================================
+           MOBILE RESPONSIVE LAYOUT
+        ======================================== */
 
         @media (max-width: 760px) {
             .mobile-header {
                 position: fixed;
                 top: 0;
-                left: 0;
                 right: 0;
+                left: 0;
+                z-index: 800;
 
                 height: 66px;
-                padding: 0 17px;
+                padding: 0 16px;
 
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
 
                 border-bottom: 1px solid rgba(82, 97, 80, 0.14);
+
                 background: rgba(247, 244, 237, 0.96);
                 backdrop-filter: blur(8px);
-
-                z-index: 800;
             }
 
-            .mobile-menu-button {
+            .menu-button {
                 width: 42px;
                 height: 42px;
 
-                border: 0;
-                border-radius: 6px;
-                background: transparent;
+                border: none;
+                border-radius: 7px;
 
+                background: transparent;
                 color: var(--olive);
+
                 font-size: 24px;
                 cursor: pointer;
             }
@@ -539,43 +572,50 @@
             }
 
             .sidebar {
-                width: min(82vw, 300px);
+                width: min(83vw, 310px);
+
                 transform: translateX(-105%);
+
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+
                 transition: transform 0.28s ease;
-                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.14);
             }
 
             .sidebar.open {
                 transform: translateX(0);
             }
 
-            .main {
+            .main-content {
                 margin-left: 0;
                 padding-top: 66px;
             }
 
             .page-section {
                 min-height: calc(100vh - 66px);
-                padding: 45px 21px;
+                padding: 46px 20px;
             }
 
             .page-title {
-                font-size: 36px;
+                font-size: 37px;
             }
 
-            .chart-image {
+            .chart-scroll {
+                max-height: 63vh;
+            }
+
+            #seatingChartImage {
                 min-width: 600px;
             }
         }
 
-        @media (max-width: 380px) {
+        @media (max-width: 390px) {
             .page-section {
-                padding-left: 16px;
                 padding-right: 16px;
+                padding-left: 16px;
             }
 
-            .table-number {
-                font-size: 43px;
+            .page-description {
+                font-size: 13px;
             }
         }
     </style>
@@ -583,10 +623,10 @@
 
 <body>
 
-    <!-- Mobile header -->
+    <!-- Mobile top bar -->
     <header class="mobile-header">
         <button
-            class="mobile-menu-button"
+            class="menu-button"
             id="menuButton"
             type="button"
             aria-label="Open navigation menu"
@@ -595,34 +635,42 @@
             ☰
         </button>
 
-        <div class="mobile-brand">Adolf & Jebien</div>
+        <div class="mobile-brand">
+            Adolf &amp; Jebien
+        </div>
 
         <div class="mobile-spacer"></div>
     </header>
 
 
-    <!-- Mobile overlay -->
+    <!-- Dark overlay shown behind mobile menu -->
     <div
         class="menu-overlay"
         id="menuOverlay"
     ></div>
 
 
-    <!-- Left navigation -->
+    <!-- Desktop sidebar / mobile slide-out navigation -->
     <aside
         class="sidebar"
         id="sidebar"
     >
-        <div class="brand">
-            <h1 class="brand-names">Adolf & Jebien</h1>
-            <p class="brand-date">DECEMBER 7, 2026</p>
+        <div class="sidebar-brand">
+            <h1 class="sidebar-names">
+                Adolf &amp; Jebien
+            </h1>
+
+            <p class="sidebar-date">
+                DECEMBER 7, 2026
+            </p>
         </div>
 
         <nav class="nav-menu">
+
             <button
                 class="nav-item active"
                 type="button"
-                data-section="seatFinderSection"
+                data-section="findSeatSection"
             >
                 <span class="nav-icon">⌕</span>
                 <span>Find Your Seat</span>
@@ -654,62 +702,78 @@
                 <span class="nav-icon">↗</span>
                 <span>Wedding Website</span>
             </button>
+
         </nav>
 
-        <p class="sidebar-note">
+        <p class="sidebar-footer">
             Eat, drink, and celebrate with us.
         </p>
     </aside>
 
 
-    <!-- Main content -->
-    <main class="main">
+    <main class="main-content">
 
-        <!-- Find Your Seat -->
+        <!-- ====================================
+             FIND YOUR SEAT
+        ===================================== -->
+
         <section
             class="page-section active"
-            id="seatFinderSection"
+            id="findSeatSection"
         >
             <div class="content-card">
-                <p class="eyebrow">Welcome to our celebration</p>
 
-                <h2 class="page-title">Find Your Seat</h2>
+                <p class="eyebrow">
+                    Welcome to our celebration
+                </p>
+
+                <h2 class="page-title">
+                    Find Your Seat
+                </h2>
 
                 <p class="page-description">
                     Enter at least two letters of your name,
                     then select your name from the list.
                 </p>
 
-                <div class="search-wrapper">
-                    <div class="search-input-wrapper">
+                <div class="search-container">
+
+                    <div class="search-input-container">
+
                         <input
-                            id="search"
+                            id="searchInput"
                             type="text"
-                            placeholder="Type your name..."
+                            placeholder="Loading guest list..."
                             autocomplete="off"
                             aria-label="Search for your name"
+                            disabled
                         >
 
-                        <span class="search-symbol">⌕</span>
+                        <span class="search-icon">
+                            ⌕
+                        </span>
+
                     </div>
 
                     <div id="suggestions"></div>
+
                 </div>
 
                 <div
-                    class="loading-message"
-                    id="loadingMessage"
+                    class="status-message"
+                    id="statusMessage"
                 >
                     Loading guest list...
                 </div>
 
-                <div id="result">
+                <div id="seatResult">
+
                     <div
                         class="guest-name"
                         id="guestName"
                     ></div>
 
-                    <div class="your-table">
+                    <div class="table-label">
                         YOU'RE SEATED AT
                     </div>
 
@@ -721,65 +785,103 @@
                     <div class="result-message">
                         We're so happy you're here ♡
                     </div>
+
                 </div>
+
             </div>
         </section>
 
 
-        <!-- Seating Chart -->
+        <!-- ====================================
+             SEATING CHART
+        ===================================== -->
+
         <section
             class="page-section"
             id="seatingChartSection"
         >
-            <div class="content-card" style="max-width: 950px;">
-                <p class="eyebrow">Reception guide</p>
+            <div class="content-card wide-card">
 
-                <h2 class="page-title">Seating Chart</h2>
+                <p class="eyebrow">
+                    Reception guide
+                </p>
+
+                <h2 class="page-title">
+                    Seating Chart
+                </h2>
 
                 <p class="page-description">
-                    Find your table’s location in the reception area.
-                    On mobile, scroll and pinch to zoom.
+                    Find your table's location in the reception area.
+                    On mobile, scroll across the chart or open the
+                    full-size image.
                 </p>
 
                 <div class="chart-frame">
-                    <div class="chart-scroll">
-                        seating-chart.jpg
 
-                        <div
-                            class="chart-placeholder"
-                            id="chartPlaceholder"
+                    <div class="chart-scroll">
+
+                        <img
+                            id="seatingChartImage"
+                            src="seating-chart.jpg"
+                            alt="Wedding reception seating chart"
                         >
-                            <strong>The seating chart image has not been added yet.</strong>
-                            <br>
+
+                        <div id="chartPlaceholder">
+                            <strong>
+                                The seating chart is coming soon.
+                            </strong>
+
+                            <br><br>
+
                             Upload an image named
-                            <code>seating-chart.jpg</code>
-                            beside your
-                            <code>index.html</code>
-                            file.
+                            <strong>seating-chart.jpg</strong>
+                            to the same repository folder as
+                            <strong>index.html</strong>.
                         </div>
+
                     </div>
+
                 </div>
 
-                <div class="chart-actions">
-                    seating-chart.jpg
+                <div
+                    class="chart-actions"
+                    id="chartActions"
+                >
+                    <a
+                        class="secondary-button"
+                        href="seating-chart.jpg"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         View Full Size ↗
                     </a>
                 </div>
+
             </div>
         </section>
 
 
-        <!-- Share Photos -->
+        <!-- ====================================
+             SHARE PHOTOS
+        ===================================== -->
+
         <section
             class="page-section"
             id="sharePhotosSection"
         >
             <div class="content-card">
-                <div class="feature-icon">▣</div>
 
-                <p class="eyebrow">Through your eyes</p>
+                <div class="feature-icon">
+                    ▣
+                </div>
 
-                <h2 class="page-title">Share Your Photos</h2>
+                <p class="eyebrow">
+                    Through your eyes
+                </p>
+
+                <h2 class="page-title">
+                    Share Your Photos
+                </h2>
 
                 <p class="page-description">
                     Caught a moment worth keeping?
@@ -795,26 +897,37 @@
                     Open Photo Folder ↗
                 </a>
 
-                <p class="privacy-note">
-                    The photo folder opens in a separate tab.
-                    Guests may be asked to sign in depending on
-                    the folder's Google Drive permissions.
+                <p class="small-note">
+                    The Google Drive folder will open in a separate tab.
+                    Guests may be asked to sign in depending on the
+                    folder's sharing permissions.
                 </p>
+
             </div>
         </section>
 
 
-        <!-- Wedding Website -->
+        <!-- ====================================
+             WEDDING WEBSITE
+        ===================================== -->
+
         <section
             class="page-section"
             id="weddingWebsiteSection"
         >
             <div class="content-card">
-                <div class="feature-icon">♡</div>
 
-                <p class="eyebrow">The day we begin</p>
+                <div class="feature-icon">
+                    ♡
+                </div>
 
-                <h2 class="page-title">Wedding Details</h2>
+                <p class="eyebrow">
+                    The day we begin
+                </p>
+
+                <h2 class="page-title">
+                    Wedding Details
+                </h2>
 
                 <p class="page-description">
                     Visit our digital invitation for the schedule,
@@ -829,6 +942,7 @@
                 >
                     Visit Our Website ↗
                 </a>
+
             </div>
         </section>
 
@@ -836,29 +950,12 @@
 
 
     <script>
-        let guests = [];
-
-        const search = document.getElementById("search");
-        const suggestions = document.getElementById("suggestions");
-        const result = document.getElementById("result");
-        const loadingMessage = document.getElementById("loadingMessage");
-
-        const sidebar = document.getElementById("sidebar");
-        const menuButton = document.getElementById("menuButton");
-        const menuOverlay = document.getElementById("menuOverlay");
-
-        const navItems = document.querySelectorAll(".nav-item");
-        const sections = document.querySelectorAll(".page-section");
-
-        const seatingChartImage =
-            document.getElementById("seatingChartImage");
-
-        const chartPlaceholder =
-            document.getElementById("chartPlaceholder");
-
-
         /*
-         * CSV FORMAT:
+         * Required CSV file:
+         *
+         * guests.csv
+         *
+         * Required format:
          *
          * Name,Table
          * Maria Luna Calapiz,8
@@ -866,47 +963,158 @@
          * Lindsay Arra Calapiz-Rojonan,5
          */
 
+        let guests = [];
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const suggestions =
+            document.getElementById("suggestions");
+
+        const seatResult =
+            document.getElementById("seatResult");
+
+        const guestName =
+            document.getElementById("guestName");
+
+        const tableNumber =
+            document.getElementById("tableNumber");
+
+        const statusMessage =
+            document.getElementById("statusMessage");
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const menuOverlay =
+            document.getElementById("menuOverlay");
+
+        const navItems =
+            document.querySelectorAll(".nav-item");
+
+        const sections =
+            document.querySelectorAll(".page-section");
+
+        const seatingChartImage =
+            document.getElementById("seatingChartImage");
+
+        const chartPlaceholder =
+            document.getElementById("chartPlaceholder");
+
+        const chartActions =
+            document.getElementById("chartActions");
+
+
+        /*
+         * Parses one CSV row.
+         *
+         * This supports ordinary rows such as:
+         * Maria Luna Calapiz,8
+         *
+         * It also supports quoted values such as:
+         * "Calapiz, Maria Luna",8
+         */
+        function parseCsvRow(row) {
+            const values = [];
+            let currentValue = "";
+            let insideQuotes = false;
+
+            for (let index = 0; index < row.length; index++) {
+                const character = row[index];
+                const nextCharacter = row[index + 1];
+
+                if (
+                    character === '"' &&
+                    insideQuotes &&
+                    nextCharacter === '"'
+                ) {
+                    currentValue += '"';
+                    index++;
+                } else if (character === '"') {
+                    insideQuotes = !insideQuotes;
+                } else if (
+                    character === "," &&
+                    !insideQuotes
+                ) {
+                    values.push(currentValue.trim());
+                    currentValue = "";
+                } else {
+                    currentValue += character;
+                }
+            }
+
+            values.push(currentValue.trim());
+
+            return values;
+        }
+
 
         async function loadGuests() {
             try {
-                const response = await fetch("guests.csv");
+                /*
+                 * Cache-busting query helps GitHub Pages fetch the
+                 * latest guests.csv after the CSV is updated.
+                 */
+                const response = await fetch(
+                    "guests.csv?v=" + Date.now()
+                );
 
                 if (!response.ok) {
                     throw new Error(
-                        "Could not load guests.csv"
+                        "guests.csv returned status " +
+                        response.status
                     );
                 }
 
-                const csv = await response.text();
+                const csvText = await response.text();
 
-                const rows = csv
+                const rows = csvText
                     .replace(/^\uFEFF/, "")
                     .split(/\r?\n/)
                     .map(row => row.trim())
                     .filter(row => row.length > 0);
 
-                if (rows.length === 0) {
+                if (rows.length < 2) {
                     throw new Error(
-                        "The guest list is empty."
+                        "guests.csv has no guest records."
                     );
                 }
 
-                // Remove the first row: Name,Table
-                rows.shift();
+                const header = parseCsvRow(rows[0]);
+
+                const nameColumn =
+                    header.findIndex(column =>
+                        column.toLowerCase() === "name"
+                    );
+
+                const tableColumn =
+                    header.findIndex(column =>
+                        column.toLowerCase() === "table"
+                    );
+
+                if (
+                    nameColumn === -1 ||
+                    tableColumn === -1
+                ) {
+                    throw new Error(
+                        "The CSV header must be Name,Table."
+                    );
+                }
 
                 guests = rows
+                    .slice(1)
                     .map(row => {
-                        const columns = row.split(",");
+                        const columns = parseCsvRow(row);
 
                         return {
                             name:
-                                columns[0]?.trim() || "",
+                                columns[nameColumn]?.trim() || "",
 
                             table:
-                                columns
-                                    .slice(1)
-                                    .join(",")
-                                    .trim() || ""
+                                columns[tableColumn]?.trim() || ""
                         };
                     })
                     .filter(guest =>
@@ -914,127 +1122,154 @@
                         guest.table !== ""
                     );
 
-                guests.sort((a, b) =>
-                    a.name.localeCompare(b.name)
+                guests.sort((firstGuest, secondGuest) =>
+                    firstGuest.name.localeCompare(
+                        secondGuest.name
+                    )
                 );
 
-                loadingMessage.style.display = "none";
+                if (guests.length === 0) {
+                    throw new Error(
+                        "No valid guests were found in guests.csv."
+                    );
+                }
 
-                console.log(
-                    "Guest list loaded:",
-                    guests
-                );
+                searchInput.disabled = false;
+                searchInput.placeholder = "Type your name...";
+
+                statusMessage.textContent =
+                    guests.length +
+                    " guest entries loaded.";
+
+                window.setTimeout(() => {
+                    statusMessage.style.display = "none";
+                }, 1800);
+
+                console.log("Guests loaded:", guests);
 
             } catch (error) {
                 console.error(
-                    "Guest list error:",
+                    "Guest list loading error:",
                     error
                 );
 
-                loadingMessage.textContent =
+                searchInput.disabled = true;
+                searchInput.placeholder =
+                    "Guest list unavailable";
+
+                statusMessage.classList.add("error");
+
+                statusMessage.textContent =
                     "The guest list could not be loaded. " +
-                    "Please check that guests.csv is in the same " +
-                    "folder as index.html.";
+                    "Make sure guests.csv is committed beside " +
+                    "index.html and begins with Name,Table.";
             }
         }
 
 
-        function clearSearchResults() {
+        function clearSearchDisplay() {
             suggestions.innerHTML = "";
-            result.style.display = "none";
+            seatResult.style.display = "none";
         }
 
 
-        function showGuest(guest) {
-            search.value = guest.name;
+        function showSelectedGuest(guest) {
+            searchInput.value = guest.name;
             suggestions.innerHTML = "";
 
-            document.getElementById(
-                "guestName"
-            ).textContent = guest.name.toUpperCase();
+            guestName.textContent =
+                guest.name.toUpperCase();
 
-            document.getElementById(
-                "tableNumber"
-            ).textContent = "TABLE " + guest.table;
+            tableNumber.textContent =
+                "TABLE " + guest.table;
 
-            result.style.display = "block";
+            seatResult.style.display = "block";
         }
 
 
-        search.addEventListener("input", function () {
-            const typed =
-                search.value.trim().toLowerCase();
+        searchInput.addEventListener(
+            "input",
+            function () {
+                const typedName =
+                    searchInput.value
+                        .trim()
+                        .toLowerCase();
 
-            clearSearchResults();
+                clearSearchDisplay();
 
-            if (typed.length < 2) {
-                return;
-            }
+                if (typedName.length < 2) {
+                    return;
+                }
 
-            const matches = guests
-                .filter(guest =>
-                    guest.name
-                        .toLowerCase()
-                        .includes(typed)
-                )
-                .slice(0, 12);
+                const matches = guests
+                    .filter(guest =>
+                        guest.name
+                            .toLowerCase()
+                            .includes(typedName)
+                    )
+                    .slice(0, 15);
 
-            if (matches.length === 0) {
-                const noMatches =
-                    document.createElement("div");
+                if (matches.length === 0) {
+                    const noMatch =
+                        document.createElement("div");
 
-                noMatches.className = "no-matches";
+                    noMatch.className = "no-match";
 
-                noMatches.textContent =
-                    "We couldn’t find that name. " +
-                    "Please check the spelling or ask one " +
-                    "of our coordinators.";
+                    noMatch.textContent =
+                        "We couldn't find that name. " +
+                        "Please check the spelling or ask " +
+                        "one of our coordinators.";
 
-                suggestions.appendChild(noMatches);
-                return;
-            }
+                    suggestions.appendChild(noMatch);
+                    return;
+                }
 
-            matches.forEach(guest => {
-                const item =
-                    document.createElement("div");
+                matches.forEach(guest => {
+                    const suggestion =
+                        document.createElement("div");
 
-                item.className = "suggestion";
-                item.textContent = guest.name;
-                item.tabIndex = 0;
+                    suggestion.className = "suggestion";
+                    suggestion.textContent = guest.name;
+                    suggestion.tabIndex = 0;
 
-                item.addEventListener(
-                    "click",
-                    function () {
-                        showGuest(guest);
-                    }
-                );
-
-                item.addEventListener(
-                    "keydown",
-                    function (event) {
-                        if (
-                            event.key === "Enter" ||
-                            event.key === " "
-                        ) {
-                            event.preventDefault();
-                            showGuest(guest);
+                    suggestion.addEventListener(
+                        "click",
+                        function () {
+                            showSelectedGuest(guest);
                         }
-                    }
-                );
+                    );
 
-                suggestions.appendChild(item);
-            });
-        });
+                    suggestion.addEventListener(
+                        "keydown",
+                        function (event) {
+                            if (
+                                event.key === "Enter" ||
+                                event.key === " "
+                            ) {
+                                event.preventDefault();
+                                showSelectedGuest(guest);
+                            }
+                        }
+                    );
 
-
-        document.addEventListener("click", function (event) {
-            const clickedInsideSearch =
-                event.target.closest(".search-wrapper");
-
-            if (!clickedInsideSearch) {
-                suggestions.innerHTML = "";
+                    suggestions.appendChild(suggestion);
+                });
             }
-        });
+        );
+
+
+        document.addEventListener(
+            "click",
+            function (event) {
+                if (
+                    !event.target.closest(
+                        ".search-container"
+                    )
+                ) {
+                    suggestions.innerHTML = "";
+                }
+            }
+        );
 
 
         function showSection(sectionId) {
@@ -1049,32 +1284,45 @@
             const selectedSection =
                 document.getElementById(sectionId);
 
-            const selectedNavItem =
+            const selectedNavigationItem =
                 document.querySelector(
-                    `[data-section="${sectionId}"]`
+                    '[data-section="' +
+                    sectionId +
+                    '"]'
                 );
 
             if (selectedSection) {
                 selectedSection.classList.add("active");
             }
 
-            if (selectedNavItem) {
-                selectedNavItem.classList.add("active");
+            if (selectedNavigationItem) {
+                selectedNavigationItem.classList.add(
+                    "active"
+                );
             }
 
-            closeMenu();
-            window.scrollTo(0, 0);
+            closeMobileMenu();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         }
 
 
         navItems.forEach(item => {
-            item.addEventListener("click", function () {
-                showSection(item.dataset.section);
-            });
+            item.addEventListener(
+                "click",
+                function () {
+                    showSection(
+                        item.dataset.section
+                    );
+                }
+            );
         });
 
 
-        function openMenu() {
+        function openMobileMenu() {
             sidebar.classList.add("open");
             menuOverlay.classList.add("visible");
 
@@ -1085,7 +1333,7 @@
         }
 
 
-        function closeMenu() {
+        function closeMobileMenu() {
             sidebar.classList.remove("open");
             menuOverlay.classList.remove("visible");
 
@@ -1096,18 +1344,32 @@
         }
 
 
-        menuButton.addEventListener("click", function () {
-            if (sidebar.classList.contains("open")) {
-                closeMenu();
-            } else {
-                openMenu();
+        menuButton.addEventListener(
+            "click",
+            function () {
+                if (sidebar.classList.contains("open")) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
             }
-        });
+        );
 
 
         menuOverlay.addEventListener(
             "click",
-            closeMenu
+            closeMobileMenu
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+                if (event.key === "Escape") {
+                    closeMobileMenu();
+                    suggestions.innerHTML = "";
+                }
+            }
         );
 
 
@@ -1116,6 +1378,17 @@
             function () {
                 seatingChartImage.style.display = "none";
                 chartPlaceholder.style.display = "block";
+                chartActions.style.display = "none";
+            }
+        );
+
+
+        seatingChartImage.addEventListener(
+            "load",
+            function () {
+                seatingChartImage.style.display = "block";
+                chartPlaceholder.style.display = "none";
+                chartActions.style.display = "block";
             }
         );
 
