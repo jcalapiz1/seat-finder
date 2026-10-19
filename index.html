@@ -1187,7 +1187,7 @@
         }
 
 
-        searchInput.addEventListener(
+/*        searchInput.addEventListener(
             "input",
             function () {
                 const typedName =
@@ -1257,6 +1257,85 @@
             }
         );
 
+*/
+        searchInput.addEventListener("input", function () {
+        
+            // Get whatever the guest typed
+            const searchText = searchInput.value
+                .trim()
+                .toLowerCase();
+        
+            // Clear previous suggestions/results
+            clearSearchDisplay();
+        
+            // Wait until at least 2 characters are entered
+            if (searchText.length < 2) {
+                return;
+            }
+        
+            // Search ANYWHERE inside the guest's full name
+            const matches = guests.filter(guest => {
+        
+                const guestName = guest.name.toLowerCase();
+        
+                return guestName.includes(searchText);
+        
+            }).slice(0, 15);
+        
+        
+            // No matching guest
+            if (matches.length === 0) {
+        
+                const noMatch = document.createElement("div");
+        
+                noMatch.className = "no-match";
+        
+                noMatch.textContent =
+                    "We couldn't find that name. " +
+                    "Please check the spelling or ask one of our coordinators.";
+        
+                suggestions.appendChild(noMatch);
+        
+                return;
+            }
+        
+        
+            // Display matching guests
+            matches.forEach(guest => {
+        
+                const suggestion =
+                    document.createElement("div");
+        
+                suggestion.className = "suggestion";
+                suggestion.textContent = guest.name;
+                suggestion.tabIndex = 0;
+        
+        
+                // Guest taps/clicks their name
+                suggestion.addEventListener("click", function () {
+                    showSelectedGuest(guest);
+                });
+        
+        
+                // Keyboard support
+                suggestion.addEventListener("keydown", function (event) {
+        
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+                        event.preventDefault();
+                        showSelectedGuest(guest);
+                    }
+        
+                });
+        
+        
+                suggestions.appendChild(suggestion);
+        
+            });
+        
+        });
 
         document.addEventListener(
             "click",
